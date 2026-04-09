@@ -1,0 +1,5 @@
+{
+  "name": "AutoServe: Vehicle Service Management",
+  "description": "A comprehensive multi-tier web application for managing vehicle services, bookings, and maintenance history with roles for Admin, Service Advisor, and Customers.",
+  "requestFramePermissions": []
+}

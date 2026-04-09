@@ -1,0 +1,56 @@
+{
+  "users": [
+    {
+      "id": "admin-1",
+      "email": "admin@autoserve.com",
+      "password": "password123",
+      "role": "admin",
+      "name": "System Admin"
+    },
+    {
+      "id": "sa-1",
+      "email": "advisor1@autoserve.com",
+      "password": "password123",
+      "role": "service_advisor",
+      "name": "John Advisor"
+    },
+    {
+      "id": "cust-1",
+      "email": "customer@gmail.com",
+      "password": "password123",
+      "role": "customer",
+      "name": "Ganesh FB"
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "v-1",
+      "customerId": "cust-1",
+      "model": "Toyota Camry",
+      "regNo": "KA-01-HH-1234",
+      "year": 2022
+    }
+  ],
+  "workItems": [
+    { "id": "wi-1", "name": "Engine Oil Change", "price": 1500 },
+    { "id": "wi-2", "name": "Fuel Filter Replacement", "price": 800 },
+    { "id": "wi-3", "name": "Wheel Alignment", "price": 600 },
+    { "id": "wi-4", "name": "General Service Charges", "price": 1200 }
+  ],
+  "serviceRecords": [
+    {
+      "id": "sr-1",
+      "vehicleId": "v-1",
+      "customerId": "cust-1",
+      "advisorId": "sa-1",
+      "status": "In Progress",
+      "bookingDate": "2026-04-08T10:00:00Z",
+      "items": [
+        { "itemId": "wi-1", "quantity": 1, "price": 1500 }
+      ],
+      "totalAmount": 1500,
+      "feedback": null,
+      "rating": null
+    }
+  ]
+}
