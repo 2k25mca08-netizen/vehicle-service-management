@@ -106,11 +106,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <header className="h-20 bg-white/80 backdrop-blur-xl border-b border-zinc-100 flex items-center justify-between px-8 sticky top-0 z-30">
           <div className="flex items-center gap-4">
             <Sheet open={open} onOpenChange={setOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="lg:hidden">
-                  <Menu className="w-6 h-6" />
-                </Button>
-              </SheetTrigger>
+              <SheetTrigger
+                render={
+                  <Button variant="ghost" size="icon" className="lg:hidden">
+                    <Menu className="w-6 h-6" />
+                  </Button>
+                }
+              />
               <SheetContent side="left" className="p-0 w-72 border-r-0">
                 <SidebarContent />
               </SheetContent>
@@ -122,14 +124,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           
           <div className="flex items-center gap-2 lg:gap-6">
             <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="ghost" size="icon" className="relative hover:bg-zinc-50 rounded-full w-10 h-10">
-                  <Bell className="w-5 h-5 text-zinc-600" />
-                  {notifications.some(n => n.unread) && (
-                    <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-blue-500 rounded-full border-2 border-white"></span>
-                  )}
-                </Button>
-              </PopoverTrigger>
+              <PopoverTrigger
+                render={
+                  <Button variant="ghost" size="icon" className="relative hover:bg-zinc-50 rounded-full w-10 h-10">
+                    <Bell className="w-5 h-5 text-zinc-600" />
+                    {notifications.some(n => n.unread) && (
+                      <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-blue-500 rounded-full border-2 border-white"></span>
+                    )}
+                  </Button>
+                }
+              />
               <PopoverContent className="w-96 p-0 rounded-2xl shadow-2xl border-zinc-100 overflow-hidden" align="end">
                 <div className="p-5 border-b border-zinc-50 bg-zinc-50/50">
                   <h3 className="font-display font-bold text-lg">Notifications</h3>

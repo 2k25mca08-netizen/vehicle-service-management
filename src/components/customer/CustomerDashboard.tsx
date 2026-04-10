@@ -94,12 +94,14 @@ export default function CustomerDashboard() {
           <p className="text-zinc-500 mt-1">Manage your fleet and track service progress in real-time.</p>
         </div>
         <Dialog>
-          <DialogTrigger asChild>
-            <Button className="h-14 px-8 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold shadow-xl shadow-brand-200 transition-all active:scale-95 gap-3">
-              <Plus className="w-5 h-5" />
-              Book New Service
-            </Button>
-          </DialogTrigger>
+          <DialogTrigger
+            render={
+              <Button className="h-14 px-8 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold shadow-xl shadow-brand-200 transition-all active:scale-95 gap-3">
+                <Plus className="w-5 h-5" />
+                Book New Service
+              </Button>
+            }
+          />
           <DialogContent className="rounded-[2rem] border-zinc-100 p-8">
             <DialogHeader>
               <DialogTitle className="text-2xl font-display font-bold">Book a New Service</DialogTitle>
