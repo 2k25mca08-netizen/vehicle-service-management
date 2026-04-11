@@ -53,12 +53,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const filteredNav = navItems.filter(item => item.roles.includes(user?.role || ""));
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full bg-white/80 backdrop-blur-xl">
+    <div className="flex flex-col h-full bg-zinc-950 text-white">
       <div className="p-8 flex items-center gap-3">
-        <div className="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center shadow-lg shadow-brand-200">
+        <div className="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center shadow-lg shadow-brand-500/30">
           <Car className="text-white w-6 h-6" />
         </div>
-        <span className="font-display font-bold text-2xl tracking-tight">AutoServe</span>
+        <span className="font-display font-bold text-2xl tracking-tight text-white">AutoServe</span>
       </div>
       
       <nav className="flex-1 px-4 space-y-1.5 mt-4">
@@ -68,8 +68,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             variant="ghost"
             className={`w-full justify-start gap-3 rounded-xl py-6 transition-all duration-200 group ${
               activeView === item.label 
-                ? "text-brand-600 bg-brand-50" 
-                : "text-zinc-500 hover:text-brand-600 hover:bg-brand-50"
+                ? "text-white bg-brand-600 shadow-lg shadow-brand-600/30" 
+                : "text-zinc-400 hover:text-white hover:bg-white/5"
             }`}
             onClick={() => {
               setActiveView(item.label);
@@ -77,7 +77,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             }}
           >
             <item.icon className={`w-5 h-5 transition-transform group-hover:scale-110 ${
-              activeView === item.label ? "text-brand-600" : "group-hover:text-brand-600"
+              activeView === item.label ? "text-white" : "group-hover:text-white"
             }`} />
             <span className="font-medium">{item.label}</span>
           </Button>
@@ -85,15 +85,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       </nav>
 
       <div className="p-6">
-        <div className="bg-zinc-50 rounded-2xl p-4 mb-6">
-          <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">Support</p>
-          <p className="text-sm text-zinc-600">Need help with your service?</p>
-          <Button variant="link" className="p-0 h-auto text-zinc-900 font-semibold mt-1">Contact Support</Button>
+        <div className="bg-white/5 rounded-2xl p-4 mb-6 border border-white/10">
+          <p className="text-xs font-bold text-brand-400 uppercase tracking-widest mb-2">Support</p>
+          <p className="text-sm text-zinc-300">Need help with your service?</p>
+          <Button variant="link" className="p-0 h-auto text-white font-semibold mt-1">Contact Support</Button>
         </div>
-        <Separator className="mb-6 opacity-50" />
+        <Separator className="mb-6 opacity-20 bg-white" />
         <Button 
           variant="ghost" 
-          className="w-full justify-start gap-3 text-zinc-500 hover:text-red-600 hover:bg-red-50 rounded-xl py-6 transition-all"
+          className="w-full justify-start gap-3 text-zinc-400 hover:text-white hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/30 rounded-xl py-6 transition-all group"
           onClick={() => {
             dispatch(logout());
             setOpen(false);
@@ -107,9 +107,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   );
 
   return (
-    <div className="min-h-screen flex mechanical-bg">
+    <div className="min-h-screen flex bg-zinc-50 relative pointer-events-auto">
       {/* Desktop Sidebar */}
-      <aside className="w-72 bg-white/80 backdrop-blur-xl border-r border-zinc-100 hidden lg:flex flex-col sticky top-0 h-screen shadow-2xl shadow-zinc-900/5">
+      <aside className="w-72 bg-zinc-950 border-r border-zinc-900 hidden lg:flex flex-col sticky top-0 h-screen shadow-2xl shadow-zinc-900/20">
         <SidebarContent />
       </aside>
 

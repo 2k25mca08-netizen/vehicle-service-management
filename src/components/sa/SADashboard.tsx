@@ -130,26 +130,26 @@ export default function SADashboard() {
                   className={`border-none cursor-pointer transition-all duration-300 rounded-[2rem] overflow-hidden ${
                     selectedRecord?.id === record.id 
                       ? "ring-2 ring-zinc-900 shadow-xl bg-white" 
-                      : "bg-white shadow-sm hover:shadow-md card-indigo"
+                      : "shadow-sm hover:shadow-md card-indigo"
                   }`}
                   onClick={() => setSelectedRecord(record)}
                 >
                   <CardContent className="p-6">
                     <div className="flex items-center gap-4">
                       <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${
-                        selectedRecord?.id === record.id ? "bg-zinc-900 text-white" : "bg-zinc-50 text-zinc-400"
+                        selectedRecord?.id === record.id ? "bg-zinc-900 text-white" : "bg-white/20 text-white"
                       }`}>
                         <Car className="w-6 h-6" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-display font-bold text-zinc-900 truncate">
+                        <p className={`font-display font-bold truncate ${selectedRecord?.id === record.id ? "text-zinc-900" : "text-white"}`}>
                           {vehicles.find(v => v.id === record.vehicleId)?.model || record.vehicleId}
                         </p>
-                        <p className="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-widest">
+                        <p className={`text-[10px] font-mono font-bold uppercase tracking-widest ${selectedRecord?.id === record.id ? "text-zinc-400" : "text-white/70"}`}>
                           {vehicles.find(v => v.id === record.vehicleId)?.regNo || "REG-PENDING"}
                         </p>
                       </div>
-                      <ChevronRight className={`w-5 h-5 transition-transform ${selectedRecord?.id === record.id ? "translate-x-1 text-zinc-900" : "text-zinc-300"}`} />
+                      <ChevronRight className={`w-5 h-5 transition-transform ${selectedRecord?.id === record.id ? "translate-x-1 text-zinc-900" : "text-white/80"}`} />
                     </div>
                   </CardContent>
                 </Card>

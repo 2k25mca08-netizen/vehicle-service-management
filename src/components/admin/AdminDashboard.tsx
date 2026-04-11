@@ -37,9 +37,9 @@ export default function AdminDashboard() {
   }, [dispatch]);
 
   const stats = [
-    { label: "Due this Week", value: serviceRecords.filter(r => r.status === "Booked").length, icon: Clock, color: "text-blue-600", bg: "bg-blue-50", trend: "+2 from yesterday", cardClass: "card-blue" },
-    { label: "Under Servicing", value: serviceRecords.filter(r => r.status === "In Progress").length, icon: Wrench, color: "text-amber-600", bg: "bg-amber-50", trend: "4 mechanics active", cardClass: "card-amber" },
-    { label: "Completed", value: serviceRecords.filter(r => r.status === "Completed").length, icon: CheckCircle2, color: "text-emerald-600", bg: "bg-emerald-50", trend: "98% satisfaction", cardClass: "card-emerald" },
+    { label: "Due this Week", value: serviceRecords.filter(r => r.status === "Booked").length, icon: Clock, color: "text-white", bg: "bg-white/20", trend: "+2 from yesterday", cardClass: "card-blue" },
+    { label: "Under Servicing", value: serviceRecords.filter(r => r.status === "In Progress").length, icon: Wrench, color: "text-white", bg: "bg-white/20", trend: "4 mechanics active", cardClass: "card-amber" },
+    { label: "Completed", value: serviceRecords.filter(r => r.status === "Completed").length, icon: CheckCircle2, color: "text-white", bg: "bg-white/20", trend: "98% satisfaction", cardClass: "card-emerald" },
   ];
 
   const handleAssign = async (recordId: string, advisorId: string) => {
@@ -83,15 +83,15 @@ export default function AdminDashboard() {
                   <div className={`${stat.bg} p-4 rounded-2xl group-hover:scale-110 transition-transform duration-300`}>
                     <stat.icon className={`${stat.color} w-7 h-7`} />
                   </div>
-                  <Badge variant="secondary" className="bg-zinc-50 text-zinc-400 border-none text-[10px] font-bold uppercase tracking-wider">
+                  <Badge variant="secondary" className="bg-white/20 text-white border-none text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm">
                     Live
                   </Badge>
                 </div>
                 <div>
-                  <p className="text-sm text-zinc-400 font-bold uppercase tracking-widest mb-1">{stat.label}</p>
+                  <p className="text-sm text-white/80 font-bold uppercase tracking-widest mb-1">{stat.label}</p>
                   <div className="flex items-baseline gap-3">
-                    <p className="text-4xl font-display font-bold text-zinc-900">{stat.value}</p>
-                    <p className="text-[10px] font-bold text-zinc-400">{stat.trend}</p>
+                    <p className="text-4xl font-display font-bold text-white">{stat.value}</p>
+                    <p className="text-[10px] font-bold text-white/70">{stat.trend}</p>
                   </div>
                 </div>
               </CardContent>

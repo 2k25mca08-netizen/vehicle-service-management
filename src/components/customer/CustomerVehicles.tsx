@@ -118,26 +118,26 @@ export default function CustomerVehicles() {
           >
             <Card className="border-none shadow-sm hover:shadow-xl transition-all duration-300 rounded-[2.5rem] overflow-hidden group bg-white card-emerald">
               <CardHeader className="p-8 pb-4">
-                <div className="w-14 h-14 bg-zinc-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-zinc-900 group-hover:text-white transition-colors">
-                  <Car className="w-7 h-7" />
+                <div className="w-14 h-14 bg-white/20 text-white rounded-2xl flex items-center justify-center mb-6 group-hover:bg-white/30 transition-colors">
+                  <Car className="w-7 h-7 text-white" />
                 </div>
-                <CardTitle className="text-2xl font-display font-bold text-zinc-900">
+                <CardTitle className="text-2xl font-display font-bold text-white">
                   {vehicle.model}
                 </CardTitle>
-                <p className="font-mono text-xs font-bold text-zinc-400 uppercase tracking-widest">
+                <p className="font-mono text-xs font-bold text-white/80 uppercase tracking-widest">
                   {vehicle.regNo}
                 </p>
               </CardHeader>
               <CardContent className="p-8 pt-4">
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-zinc-400 font-medium">Year</span>
-                  <span className="font-bold text-zinc-900">{vehicle.year}</span>
+                  <span className="text-white/70 font-medium">Year</span>
+                  <span className="font-bold text-white">{vehicle.year}</span>
                 </div>
                 <div className="flex justify-between items-center text-sm mt-3">
-                  <span className="text-zinc-400 font-medium">Last Service</span>
-                  <span className="font-bold text-zinc-900">12 Oct 2023</span>
+                  <span className="text-white/70 font-medium">Last Service</span>
+                  <span className="font-bold text-white">12 Oct 2023</span>
                 </div>
-                <Button variant="outline" className="w-full mt-8 h-12 rounded-xl border-zinc-100 font-bold text-zinc-600 hover:bg-zinc-50">
+                <Button variant="outline" className="w-full mt-8 h-12 rounded-xl border-white/20 font-bold text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all">
                   View History
                 </Button>
               </CardContent>
