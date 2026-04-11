@@ -34,6 +34,13 @@
       "email": "H@gmail.com",
       "password": "12345",
       "role": "customer"
+    },
+    {
+      "id": "u-1775898185752",
+      "name": "Test User",
+      "email": "test@test.com",
+      "password": "password123",
+      "role": "customer"
     }
   ],
   "vehicles": [
@@ -80,7 +87,7 @@
       "vehicleId": "v-1",
       "customerId": "cust-1",
       "advisorId": "sa-1",
-      "status": "In Progress",
+      "status": "Ready for Pickup",
       "bookingDate": "2026-04-08T10:00:00Z",
       "items": [
         {

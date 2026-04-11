@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { logout } from "../../store/slices/authSlice";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 import { 
   LayoutDashboard, 
   Car, 
@@ -61,7 +62,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <span className="font-display font-bold text-2xl tracking-tight text-white">AutoServe</span>
       </div>
       
-      <nav className="flex-1 px-4 space-y-1.5 mt-4">
+      <nav className="flex-1 px-4 space-y-1.5 mt-4 overflow-y-auto min-h-0 custom-scrollbar">
         {filteredNav.map((item) => (
           <Button
             key={item.label}
@@ -88,7 +89,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <div className="bg-white/5 rounded-2xl p-4 mb-6 border border-white/10">
           <p className="text-xs font-bold text-brand-400 uppercase tracking-widest mb-2">Support</p>
           <p className="text-sm text-zinc-300">Need help with your service?</p>
-          <Button variant="link" className="p-0 h-auto text-white font-semibold mt-1">Contact Support</Button>
+          <Button 
+            variant="link" 
+            className="p-0 h-auto text-white font-semibold mt-1"
+            onClick={() => toast.info("Support ticket system is coming soon!")}
+          >
+            Contact Support
+          </Button>
         </div>
         <Separator className="mb-6 opacity-20 bg-white" />
         <Button 
@@ -97,6 +104,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           onClick={() => {
             dispatch(logout());
             setOpen(false);
+            toast.success("Logged out successfully");
           }}
         >
           <LogOut className="w-5 h-5" />

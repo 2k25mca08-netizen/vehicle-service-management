@@ -73,6 +73,14 @@ async function startServer() {
     res.json(db.workItems);
   });
 
+  app.post("/api/work-items", (req, res) => {
+    const db = readDB();
+    const newItem = { id: `wi-${Date.now()}`, ...req.body };
+    db.workItems.push(newItem);
+    writeDB(db);
+    res.json(newItem);
+  });
+
   // Service Records
   app.get("/api/service-records", (req, res) => {
     const db = readDB();

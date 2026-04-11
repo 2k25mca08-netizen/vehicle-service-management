@@ -246,7 +246,14 @@ export default function CustomerDashboard() {
                     <div className="flex items-center gap-8">
                       <div className="text-right">
                         <p className="text-2xl font-display font-bold text-indigo-950">₹{record.totalAmount.toLocaleString()}</p>
-                        <Button variant="link" size="sm" className="h-auto p-0 text-indigo-600 font-bold text-xs uppercase tracking-widest mt-1 hover:text-indigo-800">Download Invoice</Button>
+                        <Button 
+                          variant="link" 
+                          size="sm" 
+                          className="h-auto p-0 text-indigo-600 font-bold text-xs uppercase tracking-widest mt-1 hover:text-indigo-800"
+                          onClick={() => toast.info("Invoice downloading is coming soon!")}
+                        >
+                          Download Invoice
+                        </Button>
                       </div>
                     </div>
                   </div>

@@ -108,8 +108,19 @@ export default function AdminDashboard() {
           </TabsList>
           
           <div className="flex gap-3">
-            <Button variant="outline" className="rounded-xl border-zinc-200 font-semibold px-6 hover:bg-zinc-50 btn-mechanical">Export PDF</Button>
-            <Button className="rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 shadow-lg shadow-brand-100 transition-all active:scale-95 btn-mechanical">New Booking</Button>
+            <Button 
+              variant="outline" 
+              className="rounded-xl border-zinc-200 font-semibold px-6 hover:bg-zinc-50 btn-mechanical"
+              onClick={() => toast.info("PDF Exporting is coming soon!")}
+            >
+              Export PDF
+            </Button>
+            <Button 
+              className="rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 shadow-lg shadow-brand-100 transition-all active:scale-95 btn-mechanical"
+              onClick={() => toast.info("New Booking modal is coming soon!")}
+            >
+              New Booking
+            </Button>
           </div>
         </div>
 
@@ -180,7 +191,12 @@ export default function AdminDashboard() {
                             Process
                           </Button>
                         )}
-                        <Button size="sm" variant="ghost" className="rounded-xl w-9 h-9 p-0 hover:bg-zinc-100">
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="rounded-xl w-9 h-9 p-0 hover:bg-zinc-100"
+                          onClick={() => toast.info("Invoice viewing is coming soon!")}
+                        >
                           <FileText className="w-4 h-4 text-zinc-400" />
                         </Button>
                       </TableCell>

@@ -6,6 +6,7 @@ interface ServiceState {
   serviceRecords: any[];
   workItems: any[];
   advisors: any[];
+  customers: any[];
   loading: boolean;
   error: string | null;
 }
@@ -39,6 +40,11 @@ export const fetchAdvisors = createAsyncThunk("service/fetchAdvisors", async () 
   return response.data;
 });
 
+export const fetchCustomers = createAsyncThunk("service/fetchCustomers", async () => {
+  const response = await axios.get("/api/customers");
+  return response.data;
+});
+
 export const updateServiceRecord = createAsyncThunk(
   "service/updateServiceRecord",
   async ({ id, data }: { id: string; data: any }) => {
@@ -51,6 +57,14 @@ export const createServiceRecord = createAsyncThunk(
   "service/createServiceRecord",
   async (data: any) => {
     const response = await axios.post("/api/service-records", data);
+    return response.data;
+  }
+);
+
+export const createWorkItem = createAsyncThunk(
+  "service/createWorkItem",
+  async (data: any) => {
+    const response = await axios.post("/api/work-items", data);
     return response.data;
   }
 );
@@ -81,6 +95,12 @@ const serviceSlice = createSlice({
       .addCase(fetchAdvisors.fulfilled, (state, action) => {
         state.advisors = action.payload;
       })
+      .addCase(fetchCustomers.fulfilled, (state, action) => {
+        // Users are currently stored in a generic way, but we filter for customers in MasterData
+        // However, for centralized state, we could add a customers array
+        // Let's add it to the state.
+        (state as any).customers = action.payload;
+      })
       .addCase(updateServiceRecord.fulfilled, (state, action) => {
         const index = state.serviceRecords.findIndex((r) => r.id === action.payload.id);
         if (index !== -1) {
@@ -92,6 +112,9 @@ const serviceSlice = createSlice({
       })
       .addCase(createVehicle.fulfilled, (state, action) => {
         state.vehicles.push(action.payload);
+      })
+      .addCase(createWorkItem.fulfilled, (state, action) => {
+        state.workItems.push(action.payload);
       });
   },
 });
