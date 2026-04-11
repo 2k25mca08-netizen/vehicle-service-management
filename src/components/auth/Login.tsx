@@ -9,7 +9,11 @@ import { Car, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { motion } from "motion/react";
 
-export default function Login() {
+interface LoginProps {
+  onSignUpClick: () => void;
+}
+
+export default function Login({ onSignUpClick }: LoginProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch<AppDispatch>();
@@ -110,6 +114,16 @@ export default function Login() {
                 {loading ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : "Sign In"}
               </Button>
             </form>
+
+            <p className="mt-8 text-center text-sm text-zinc-500">
+              Don't have an account?{" "}
+              <button 
+                onClick={onSignUpClick}
+                className="text-brand-600 font-bold hover:underline"
+              >
+                Sign Up
+              </button>
+            </p>
 
             <div className="mt-10 p-6 bg-zinc-50 rounded-[2rem] border border-zinc-100">
               <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-4">Demo Access</p>

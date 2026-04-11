@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "./store";
-import Login from "./components/auth/Login";
+import AuthPage from "./components/auth/AuthPage";
 import DashboardLayout from "./components/layout/DashboardLayout";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import SADashboard from "./components/sa/SADashboard";
@@ -10,7 +10,7 @@ export default function AppContent() {
   const { user } = useSelector((state: RootState) => state.auth);
 
   if (!user) {
-    return <Login />;
+    return <AuthPage />;
   }
 
   return (

@@ -55,6 +55,14 @@ export const createServiceRecord = createAsyncThunk(
   }
 );
 
+export const createVehicle = createAsyncThunk(
+  "service/createVehicle",
+  async (data: any) => {
+    const response = await axios.post("/api/vehicles", data);
+    return response.data;
+  }
+);
+
 const serviceSlice = createSlice({
   name: "service",
   initialState,
@@ -81,6 +89,9 @@ const serviceSlice = createSlice({
       })
       .addCase(createServiceRecord.fulfilled, (state, action) => {
         state.serviceRecords.push(action.payload);
+      })
+      .addCase(createVehicle.fulfilled, (state, action) => {
+        state.vehicles.push(action.payload);
       });
   },
 });

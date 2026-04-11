@@ -36,6 +36,18 @@ export const login = createAsyncThunk(
   }
 );
 
+export const signup = createAsyncThunk(
+  "auth/signup",
+  async (userData: any, { rejectWithValue }) => {
+    try {
+      const response = await axios.post("/api/auth/signup", userData);
+      return response.data;
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data?.message || "Signup failed");
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -59,6 +71,18 @@ const authSlice = createSlice({
         state.token = action.payload.token;
       })
       .addCase(login.rejected, (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(signup.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(signup.fulfilled, (state) => {
+        state.loading = false;
+        // Don't update user/token state to prevent auto-login
+      })
+      .addCase(signup.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.error = action.payload;
       });

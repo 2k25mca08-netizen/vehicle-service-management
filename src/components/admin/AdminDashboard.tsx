@@ -37,9 +37,9 @@ export default function AdminDashboard() {
   }, [dispatch]);
 
   const stats = [
-    { label: "Due this Week", value: serviceRecords.filter(r => r.status === "Booked").length, icon: Clock, color: "text-blue-600", bg: "bg-blue-50", trend: "+2 from yesterday" },
-    { label: "Under Servicing", value: serviceRecords.filter(r => r.status === "In Progress").length, icon: Wrench, color: "text-amber-600", bg: "bg-amber-50", trend: "4 mechanics active" },
-    { label: "Completed", value: serviceRecords.filter(r => r.status === "Completed").length, icon: CheckCircle2, color: "text-green-600", bg: "bg-green-50", trend: "98% satisfaction" },
+    { label: "Due this Week", value: serviceRecords.filter(r => r.status === "Booked").length, icon: Clock, color: "text-blue-600", bg: "bg-blue-50", trend: "+2 from yesterday", cardClass: "card-blue" },
+    { label: "Under Servicing", value: serviceRecords.filter(r => r.status === "In Progress").length, icon: Wrench, color: "text-amber-600", bg: "bg-amber-50", trend: "4 mechanics active", cardClass: "card-amber" },
+    { label: "Completed", value: serviceRecords.filter(r => r.status === "Completed").length, icon: CheckCircle2, color: "text-emerald-600", bg: "bg-emerald-50", trend: "98% satisfaction", cardClass: "card-emerald" },
   ];
 
   const handleAssign = async (recordId: string, advisorId: string) => {
@@ -77,7 +77,7 @@ export default function AdminDashboard() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1 }}
           >
-            <Card className="border-none shadow-sm hover:shadow-md transition-shadow rounded-2xl overflow-hidden group">
+            <Card className={`border-none shadow-sm hover:shadow-md transition-shadow rounded-2xl overflow-hidden group ${stat.cardClass}`}>
               <CardContent className="p-8">
                 <div className="flex justify-between items-start mb-6">
                   <div className={`${stat.bg} p-4 rounded-2xl group-hover:scale-110 transition-transform duration-300`}>
@@ -108,8 +108,8 @@ export default function AdminDashboard() {
           </TabsList>
           
           <div className="flex gap-3">
-            <Button variant="outline" className="rounded-xl border-zinc-200 font-semibold px-6 hover:bg-zinc-50">Export PDF</Button>
-            <Button className="rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 shadow-lg shadow-brand-100 transition-all active:scale-95">New Booking</Button>
+            <Button variant="outline" className="rounded-xl border-zinc-200 font-semibold px-6 hover:bg-zinc-50 btn-mechanical">Export PDF</Button>
+            <Button className="rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 shadow-lg shadow-brand-100 transition-all active:scale-95 btn-mechanical">New Booking</Button>
           </div>
         </div>
 

@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "motion/react";
 
-export default function MasterData() {
+export default function MasterData({ defaultTab = "vehicles" }: { defaultTab?: string }) {
   const dispatch = useDispatch<AppDispatch>();
   const { vehicles, workItems } = useSelector((state: RootState) => state.service);
   const [searchTerm, setSearchTerm] = useState("");
@@ -27,7 +27,7 @@ export default function MasterData() {
         <CardTitle className="font-display font-bold text-xl">Master Data Management</CardTitle>
       </CardHeader>
       <CardContent className="p-8">
-        <Tabs defaultValue="vehicles" className="w-full">
+        <Tabs defaultValue={defaultTab} className="w-full">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
             <TabsList className="bg-zinc-50 p-1 rounded-xl border border-zinc-100 w-fit">
               <TabsTrigger value="vehicles" className="rounded-lg px-6 py-2 data-[state=active]:bg-white data-[state=active]:shadow-sm font-medium">Vehicles</TabsTrigger>

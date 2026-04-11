@@ -27,11 +27,14 @@ import {
 } from "@/components/ui/popover";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion, AnimatePresence } from "motion/react";
+import MasterData from "../admin/MasterData";
+import CustomerVehicles from "../customer/CustomerVehicles";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { user } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [activeView, setActiveView] = useState("Dashboard");
 
   const notifications = [
     { id: 1, title: "Service Scheduled", message: "Your Toyota Camry service is scheduled for tomorrow.", time: "2h ago", unread: true },
@@ -63,10 +66,19 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <Button
             key={item.label}
             variant="ghost"
-            className="w-full justify-start gap-3 text-zinc-500 hover:text-brand-600 hover:bg-brand-50 rounded-xl py-6 transition-all duration-200 group"
-            onClick={() => setOpen(false)}
+            className={`w-full justify-start gap-3 rounded-xl py-6 transition-all duration-200 group ${
+              activeView === item.label 
+                ? "text-brand-600 bg-brand-50" 
+                : "text-zinc-500 hover:text-brand-600 hover:bg-brand-50"
+            }`}
+            onClick={() => {
+              setActiveView(item.label);
+              setOpen(false);
+            }}
           >
-            <item.icon className="w-5 h-5 group-hover:scale-110 transition-transform group-hover:text-brand-600" />
+            <item.icon className={`w-5 h-5 transition-transform group-hover:scale-110 ${
+              activeView === item.label ? "text-brand-600" : "group-hover:text-brand-600"
+            }`} />
             <span className="font-medium">{item.label}</span>
           </Button>
         ))}
@@ -97,13 +109,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="min-h-screen flex mechanical-bg">
       {/* Desktop Sidebar */}
-      <aside className="w-72 bg-white/80 backdrop-blur-xl border-r border-zinc-100 hidden lg:flex flex-col sticky top-0 h-screen">
+      <aside className="w-72 bg-white/80 backdrop-blur-xl border-r border-zinc-100 hidden lg:flex flex-col sticky top-0 h-screen shadow-2xl shadow-zinc-900/5">
         <SidebarContent />
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col min-w-0">
-        <header className="h-20 bg-white/80 backdrop-blur-xl border-b border-zinc-100 flex items-center justify-between px-8 sticky top-0 z-30">
+      <div className="flex-1 flex flex-col min-w-0 relative">
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none mechanical-bg-dark z-0" />
+        
+        <header className="h-20 bg-white/80 backdrop-blur-xl border-b border-zinc-100 flex items-center justify-between px-8 sticky top-0 z-30 shadow-sm">
           <div className="flex items-center gap-4">
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger
@@ -179,11 +193,27 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         <main className="flex-1 p-6 lg:p-10 overflow-auto">
           <motion.div
+            key={activeView}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
-            {children}
+            {activeView === "Dashboard" ? children : (
+              <div className="space-y-6">
+                {activeView === "Vehicles" && user?.role === "admin" && <MasterData defaultTab="vehicles" />}
+                {activeView === "Vehicles" && user?.role === "customer" && <CustomerVehicles />}
+                {activeView === "Work Items" && user?.role === "admin" && <MasterData defaultTab="work-items" />}
+                {activeView === "Customers" && user?.role === "admin" && <MasterData defaultTab="customers" />}
+                {activeView === "Advisors" && user?.role === "admin" && <MasterData defaultTab="advisors" />}
+                
+                {/* Fallback for views not yet fully implemented for specific roles */}
+                {((activeView === "Work Items" || activeView === "Customers" || activeView === "Advisors") && user?.role !== "admin") && (
+                  <div className="p-12 bg-white rounded-[2.5rem] border border-dashed border-zinc-200 text-center text-zinc-400 italic">
+                    {activeView} management module coming soon for {user?.role.replace("_", " ")}s...
+                  </div>
+                )}
+              </div>
+            )}
           </motion.div>
         </main>
       </div>

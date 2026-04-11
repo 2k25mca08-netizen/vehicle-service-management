@@ -96,7 +96,7 @@ export default function CustomerDashboard() {
         <Dialog>
           <DialogTrigger
             render={
-              <Button className="h-14 px-8 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold shadow-xl shadow-brand-200 transition-all active:scale-95 gap-3">
+              <Button className="h-14 px-8 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold shadow-xl shadow-brand-200 transition-all active:scale-95 gap-3 btn-mechanical">
                 <Plus className="w-5 h-5" />
                 Book New Service
               </Button>
@@ -109,14 +109,25 @@ export default function CustomerDashboard() {
             <div className="space-y-6 py-6">
               <div className="space-y-2">
                 <Label className="text-xs font-bold uppercase tracking-widest text-zinc-400">Select Vehicle</Label>
-                <Select onValueChange={(val) => setBooking({ ...booking, vehicleId: val })}>
-                  <SelectTrigger className="h-14 rounded-xl border-zinc-100 bg-zinc-50/50">
+                <Select 
+                  value={booking.vehicleId} 
+                  onValueChange={(val) => setBooking({ ...booking, vehicleId: val })}
+                >
+                  <SelectTrigger className="h-14 w-full rounded-xl border-zinc-100 bg-zinc-50/50">
                     <SelectValue placeholder="Choose vehicle" />
                   </SelectTrigger>
                   <SelectContent className="rounded-xl border-zinc-100 shadow-xl">
-                    {myVehicles.map(v => (
-                      <SelectItem key={v.id} value={v.id} className="rounded-lg">{v.model} ({v.regNo})</SelectItem>
-                    ))}
+                    {myVehicles.length > 0 ? (
+                      myVehicles.map(v => (
+                        <SelectItem key={v.id} value={v.id} className="rounded-lg">
+                          {v.model} ({v.regNo})
+                        </SelectItem>
+                      ))
+                    ) : (
+                      <div className="p-4 text-center text-xs text-zinc-400 italic">
+                        No vehicles found. Please add one in "My Garage".
+                      </div>
+                    )}
                   </SelectContent>
                 </Select>
               </div>
@@ -153,7 +164,9 @@ export default function CustomerDashboard() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: idx * 0.1 }}
             >
-              <Card className="border-none shadow-sm hover:shadow-xl transition-all duration-300 rounded-[2rem] overflow-hidden group">
+              <Card className={`border-none shadow-sm hover:shadow-xl transition-all duration-300 rounded-[2rem] overflow-hidden group ${
+                record.status === "In Progress" ? "card-amber" : "card-blue"
+              }`}>
                 <CardHeader className="p-8 pb-4">
                   <div className="flex justify-between items-start mb-6">
                     <Badge className={`rounded-xl px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest border-none gap-2 ${
@@ -217,10 +230,10 @@ export default function CustomerDashboard() {
           <CardContent className="p-0">
             <div className="divide-y divide-zinc-50">
               {myRecords.filter(r => r.status === "Ready for Pickup").map((record) => (
-                <div key={record.id} className="p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 hover:bg-zinc-50/50 transition-colors group">
+                <div key={record.id} className="p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 hover:bg-emerald-50/30 transition-colors group border-b border-zinc-50 last:border-0">
                   <div className="flex items-center gap-6">
-                    <div className="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <CheckCircle2 className="w-7 h-7 text-green-600" />
+                    <div className="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <CheckCircle2 className="w-7 h-7 text-emerald-600" />
                     </div>
                     <div>
                       <p className="text-xl font-display font-bold text-zinc-900">{myVehicles.find(v => v.id === record.vehicleId)?.model}</p>

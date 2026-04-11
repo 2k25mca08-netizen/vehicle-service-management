@@ -130,7 +130,7 @@ export default function SADashboard() {
                   className={`border-none cursor-pointer transition-all duration-300 rounded-[2rem] overflow-hidden ${
                     selectedRecord?.id === record.id 
                       ? "ring-2 ring-zinc-900 shadow-xl bg-white" 
-                      : "bg-white shadow-sm hover:shadow-md"
+                      : "bg-white shadow-sm hover:shadow-md card-indigo"
                   }`}
                   onClick={() => setSelectedRecord(record)}
                 >
@@ -267,7 +267,7 @@ export default function SADashboard() {
                       </div>
                       <Button 
                         onClick={() => handleComplete(selectedRecord.id)} 
-                        className="h-16 px-10 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-lg shadow-2xl shadow-brand-200 transition-all active:scale-95"
+                        className="h-16 px-10 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-lg shadow-2xl shadow-brand-200 transition-all active:scale-95 btn-mechanical"
                       >
                         Complete Service
                       </Button>

@@ -30,6 +30,29 @@ async function startServer() {
     }
   });
 
+  app.post("/api/auth/signup", (req, res) => {
+    const { name, email, password, role = "customer" } = req.body;
+    const db = readDB();
+    
+    if (db.users.find((u: any) => u.email === email)) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    const newUser = {
+      id: `u-${Date.now()}`,
+      name,
+      email,
+      password,
+      role
+    };
+
+    db.users.push(newUser);
+    writeDB(db);
+
+    const { password: _, ...userWithoutPassword } = newUser;
+    res.json({ user: userWithoutPassword, token: "mock-jwt-token" });
+  });
+
   // Master Data: Vehicles
   app.get("/api/vehicles", (req, res) => {
     const db = readDB();
