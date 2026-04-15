@@ -4,26 +4,57 @@ import path from "path";
 import fs from "fs";
 
 const app = express();
-const DB_PATH = path.join(process.cwd(), "db.json");
+// Use a more robust way to find the DB file in serverless environments
+const DB_PATH = path.resolve(process.cwd(), "db.json");
 
 app.use(express.json());
 
 // Helper to read DB
-const readDB = () => JSON.parse(fs.readFileSync(DB_PATH, "utf-8"));
+const readDB = () => {
+  try {
+    if (!fs.existsSync(DB_PATH)) {
+      console.warn("[DB] db.json not found at " + DB_PATH + ". Using fallback empty state.");
+      return { users: [], vehicles: [], workItems: [], serviceRecords: [] };
+    }
+    const data = fs.readFileSync(DB_PATH, "utf-8");
+    return JSON.parse(data);
+  } catch (err) {
+    console.error("[DB] Error reading database:", err);
+    return { users: [], vehicles: [], workItems: [], serviceRecords: [] };
+  }
+};
+
 // Helper to write DB
-const writeDB = (data: any) => fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
+const writeDB = (data: any) => {
+  try {
+    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
+  } catch (err) {
+    console.error("[DB] Error writing to database:", err);
+  }
+};
+
+// Request logger for Vercel logs
+app.use((req, res, next) => {
+  console.log(`[API] ${req.method} ${req.url}`);
+  next();
+});
 
 // --- API Routes ---
 
 // Auth Mock
 app.post("/api/auth/login", (req, res) => {
   const { email, password } = req.body;
+  console.log(`[AUTH] Login attempt for: ${email}`);
+  
   const db = readDB();
   const user = db.users.find((u: any) => u.email === email && u.password === password);
+  
   if (user) {
     const { password, ...userWithoutPassword } = user;
+    console.log(`[AUTH] Login successful for: ${email}`);
     res.json({ user: userWithoutPassword, token: "mock-jwt-token" });
   } else {
+    console.warn(`[AUTH] Login failed for: ${email}`);
     res.status(401).json({ message: "Invalid credentials" });
   }
 });
