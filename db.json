@@ -3,21 +3,21 @@
     {
       "id": "admin-1",
       "email": "admin@autoserve.com",
-      "password": "password123",
+      "password": "123",
       "role": "admin",
       "name": "System Admin"
     },
     {
       "id": "sa-1",
       "email": "advisor1@autoserve.com",
-      "password": "password123",
+      "password": "123",
       "role": "service_advisor",
       "name": "John Advisor"
     },
     {
       "id": "cust-1",
       "email": "customer@gmail.com",
-      "password": "password123",
+      "password": "123",
       "role": "customer",
       "name": "Ganesh FB"
     },
@@ -39,7 +39,7 @@
       "id": "u-1775898185752",
       "name": "Test User",
       "email": "test@test.com",
-      "password": "password123",
+      "password": "123",
       "role": "customer"
     }
   ],
