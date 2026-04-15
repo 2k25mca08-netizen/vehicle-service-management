@@ -4,8 +4,8 @@ import path from "path";
 import fs from "fs";
 
 const app = express();
-// Use a more robust way to find the DB file in serverless environments
-const DB_PATH = path.resolve(process.cwd(), "db.json");
+// Use __dirname for more reliable pathing in serverless environments
+const DB_PATH = path.resolve(__dirname, "db.json");
 
 app.use(express.json());
 
